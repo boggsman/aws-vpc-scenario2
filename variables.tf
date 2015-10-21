@@ -15,8 +15,13 @@ variable "amis" {
     }
 }
 
+variable "default_route_cidr" {
+    description = "default route CIDR"
+    default = "0.0.0.0/0"
+}
+
 variable "vpc_cidr" {
-    description = "CIDR for the whole VPC"
+    description = "CIDR for the entire VPC"
     default = "10.0.0.0/16"
 }
 
