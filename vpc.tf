@@ -22,7 +22,7 @@ resource "aws_internet_gateway" "default" {
 */
 
 resource "aws_instance" "nat" {
-    ami = "ami-224dc94a" # this is a special ami preconfigured to do NAT
+    ami = "${lookup(var.nat_ami, var.aws_region)}"
     instance_type = "m1.small"
     key_name = "${var.aws_key_name}"
     security_groups = ["${aws_security_group.nat.id}"]
@@ -50,7 +50,7 @@ resource "aws_eip" "nat" {
 
 resource "aws_instance" "web-1" {
     ami = "${lookup(var.amis, var.aws_region)}"
-    availability_zone = "us-east-1a"
+    availability_zone = "${var.aws_availability_zone}"
     instance_type = "m1.small"
     key_name = "${var.aws_key_name}"
     security_groups = ["${aws_security_group.web.id}"]
@@ -78,7 +78,7 @@ resource "aws_eip" "web-1" {
 
 resource "aws_instance" "db-1" {
     ami = "${lookup(var.amis, var.aws_region)}"
-    availability_zone = "us-east-1a"
+    availability_zone = "${var.aws_availability_zone}"
     instance_type = "m1.small"
     key_name = "${var.aws_key_name}"
     security_groups = ["${aws_security_group.db.id}"]

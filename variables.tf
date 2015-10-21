@@ -8,6 +8,18 @@ variable "aws_region" {
     default = "us-east-1"
 }
 
+variable "aws_availability_zone" {
+    description = "VPC Availability Zone"
+    default = "us-east-1a"
+}
+
+variable "nat_ami" {
+    description = "NAT AMI by region"
+    default = {
+        us-east-1 = "ami-224dc94a" # this is a special AMI preconfigured to do NAT
+    }
+}
+
 variable "amis" {
     description = "AMIs by region"
     default = {
