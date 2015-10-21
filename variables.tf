@@ -13,6 +13,11 @@ variable "aws_availability_zone" {
     default = "us-east-1a"
 }
 
+variable "instance_type" {
+    description = "Default instance type"
+    default = "m1.small"
+}
+
 variable "nat_ami" {
     description = "NAT AMI by region"
     default = {

@@ -23,7 +23,7 @@ resource "aws_internet_gateway" "default" {
 
 resource "aws_instance" "nat" {
     ami = "${lookup(var.nat_ami, var.aws_region)}"
-    instance_type = "m1.small"
+    instance_type = "${var.instance_type}"
     key_name = "${var.aws_key_name}"
     security_groups = ["${aws_security_group.nat.id}"]
     subnet_id = "${aws_subnet.public-subnet1.id}"
@@ -51,7 +51,7 @@ resource "aws_eip" "nat" {
 resource "aws_instance" "web-1" {
     ami = "${lookup(var.amis, var.aws_region)}"
     availability_zone = "${var.aws_availability_zone}"
-    instance_type = "m1.small"
+    instance_type = "${var.instance_type}"
     key_name = "${var.aws_key_name}"
     security_groups = ["${aws_security_group.web.id}"]
     subnet_id = "${aws_subnet.public-subnet1.id}"
@@ -79,7 +79,7 @@ resource "aws_eip" "web-1" {
 resource "aws_instance" "db-1" {
     ami = "${lookup(var.amis, var.aws_region)}"
     availability_zone = "${var.aws_availability_zone}"
-    instance_type = "m1.small"
+    instance_type = "${var.instance_type}"
     key_name = "${var.aws_key_name}"
     security_groups = ["${aws_security_group.db.id}"]
     subnet_id = "${aws_subnet.private-subnet1.id}"
